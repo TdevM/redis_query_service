@@ -9,8 +9,8 @@ const server = Hapi.server({
     port: 8001
 });
 
-// Add the route
-server.route(routes);
+
+server.route(...routes);
 
 // Start the server
 async function start() {
