@@ -7,7 +7,7 @@ Make sure you have node, redis and npm installed.
 1 Clone repository.
 
 ````
-git clone https://github.com/TdevM/redis_caching_example.git
+git clone https://github.com/TdevM/redis_query_service.git
 ````
 
 2. Install Dependencies.
