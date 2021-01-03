@@ -2,6 +2,13 @@
 import routes from './api';
 
 const Hapi = require('hapi');
+require('dotenv').config()
+import redis from './services/redis'
+
+
+redis.on("connect", () => {
+    console.log('Redis connected')
+})
 
 // Create a server with a host and port
 const server = Hapi.server({
