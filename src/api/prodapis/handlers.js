@@ -3,15 +3,15 @@ import {getParseTree, processExpression} from '../../services/expressionParser'
 import _ from 'lodash'
 
 
-
 export const evaluate = async (request, h) => {
     try {
         const payload = request.payload
-        // console.log(getParseTree(payload.expression))
-        console.log(payload.expression)
         const record = await Redis.get(request.payload.user_id)
+        console.log(getParseTree(payload.expression, JSON.parse(record)))
+        console.log(payload.expression)
 
-        processExpression(payload.expression, JSON.parse(record))
+
+        // processExpression(payload.expression, JSON.parse(record))
         return 'This thing needs to be evaluated'
     } catch (e) {
         return h.response({status: 'badRequest error', error: e}).code(400)

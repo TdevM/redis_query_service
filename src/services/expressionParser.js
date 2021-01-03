@@ -1,11 +1,13 @@
 const jsep = require("jsep");
 
+import {parse, eval as evaluated} from 'expression-eval';
+
+
 jsep.addBinaryOp("AND", 10);
 jsep.addBinaryOp("OR", 10);
-export const getParseTree = (inputString) => {
-    return jsep(inputString);
+export const getParseTree = (inputString, userRecord) => {
+    return evaluated(jsep(processExpression(inputString, userRecord)), {});
 }
-
 const operators = {
     'AND': function (a, b) {
         return a && b
@@ -24,6 +26,12 @@ const operators = {
     }
 };
 
+const operatorMap = {
+    'AND': '&&',
+    'OR': '||',
+}
+
+
 const processDataType = (type) => {
     if (type === String('TRUE')) {
         return true
@@ -37,16 +45,7 @@ const processDataType = (type) => {
 export const processExpression = (inputString, userRecord) => {
     const tokens = inputString.split(' ')
     const processedTokens = tokens.map((token) => {
-        return (userRecord[token]) ? processDataType(userRecord[token]) : operators[token] || processDataType(token)
+        return (userRecord[token]) ? processDataType(userRecord[token]) : operatorMap[token] || processDataType(token)
     })
-    console.log(tokens)
-    console.log(processedTokens)
-    console.log(userRecord)
-    let evaluated = []
-    for (let i = 0; i < processedTokens.length; i++) {
-        if (typeof processedTokens[i] === "function") {
-            evaluated.push(processedTokens[i](processedTokens[i - 1], [i + 1]))
-        }
-    }
-    console.log(evaluated)
+    return processedTokens.join(' ')
 }
