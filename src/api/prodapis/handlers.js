@@ -6,6 +6,9 @@ export const evaluate = async (request, h) => {
     try {
         const payload = request.payload
         const record = await Redis.hgetall(request.payload.user_id)
+        if (_.isEmpty(record)) {
+            return h.response(404).code(404)
+        }
         return evaluateQuery(payload.expression, record)
     } catch (e) {
         return h.response({status: 'badRequest error', e: e}).code(400)
