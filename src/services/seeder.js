@@ -25,7 +25,7 @@ csvtojsonV2()
     .fromStream(readStream)
     .subscribe((json) => {
         return new Promise((resolve, reject) => {
-            pipeline.set(json.user_id, JSON.stringify(json))
+            pipeline.hmset(json.user_id, json)
             resolve(json)
             // long operation for each json e.g. transform / write into database.
         })
