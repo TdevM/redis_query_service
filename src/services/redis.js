@@ -1,5 +1,5 @@
 const Redis = require("ioredis");
-export default new Redis({
+module.exports = new Redis({
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT
 });
