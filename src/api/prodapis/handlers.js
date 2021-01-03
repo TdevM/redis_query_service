@@ -1,25 +1,22 @@
-let adder = (sum, element) => {
-	let p = new Promise ((resolve) => {
-    resolve(sum + element);
-  });
-
-  return p;
+export const evaluate = (request, h) => {
+    return 'This thing needs to be evaluated'
 }
 
 
-export let loop = (request, h) => {
-  let numbers = [1,2,3,4,5,6,7,8,9,10];
-  let sum = 0;
-  
-  numbers.forEach(n => {
-    console.log(`Trying to add ${n}`);
-  	adder(sum, n)
-  		.then(res => {
-        console.log(`Current sum is ${n}`);
-        sum = res
-      });
-  });
-  
-  return sum;
+export const get = (request, h) => {
+    const id = request.params.id;
+    return 'Hello ' + id
 };
 
+
+export const put = (request, h) => {
+
+}
+
+export const del = (request, h) => {
+
+}
+
+export const post = (request, h) => {
+
+}
