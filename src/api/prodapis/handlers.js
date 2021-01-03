@@ -1,22 +1,62 @@
-export const evaluate = (request, h) => {
+import Redis from '../../services/redis'
+import _ from 'lodash'
+
+export const evaluate = async (request, h) => {
+    const payload = request.payload
+    console.log(payload.expression)
     return 'This thing needs to be evaluated'
 }
 
 
-export const get = (request, h) => {
-    const id = request.params.id;
-    return 'Hello ' + id
+export const get = async (request, h) => {
+    try {
+        const record = await Redis.get(request.params.id)
+        return record ? JSON.parse(record) : h.response(404).code(404)
+    } catch (e) {
+        return h.response({status: 'badRequest error'}).code(400)
+    }
+
 };
 
 
-export const put = (request, h) => {
+export const patch = async (request, h) => {
+    try {
+        const user_id = request.params.id
+        const record = await Redis.get(user_id)
+        if (record) {
+            const updatedRecord = _.merge(JSON.parse(record), request.payload);
+            await Redis.set(user_id, JSON.stringify(updatedRecord))
+            return {status: 'success', message: 'updated'}
+        } else {
+            return h.response({status: 'notFound error'}).code(404)
+        }
+
+    } catch (e) {
+        console.log(e)
+        return h.response({status: 'badRequest error'}).code(400)
+    }
+}
+
+export const del = async (request, h) => {
+    try {
+        await Redis.del(request.params.id)
+        return {status: 'success', message: 'deleted'}
+    } catch (e) {
+        return h.response({status: 'badRequest error'}).code(400)
+    }
 
 }
 
-export const del = (request, h) => {
-
-}
-
-export const post = (request, h) => {
-
+export const post = async (request, h) => {
+    try {
+        const {user_id} = request.payload
+        const record = await Redis.get(user_id)
+        if (record) {
+            return {status: 'error', message: 'duplicate insert failed'}
+        }
+        await Redis.set(user_id, JSON.stringify(request.payload))
+        return {status: 'success', message: 'inserted'}
+    } catch (e) {
+        return h.response({status: 'badRequest error'}).code(400)
+    }
 }

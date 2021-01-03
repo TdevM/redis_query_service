@@ -2,7 +2,7 @@ import * as handlers from './handlers';
 
 let routes = [
     {
-        method: 'GET',
+        method: 'POST',
         path: '/evaluate',
         handler: handlers.evaluate
     },
@@ -12,9 +12,14 @@ let routes = [
         handler: handlers.get
     },
     {
-        method: 'PUT',
+        method: 'POST',
+        path: '/users',
+        handler: handlers.post
+    },
+    {
+        method: 'PATCH',
         path: '/users/{id}',
-        handler: handlers.put
+        handler: handlers.patch
     },
     {
         method: 'DELETE',
