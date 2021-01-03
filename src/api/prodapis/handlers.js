@@ -1,10 +1,15 @@
 import Redis from '../../services/redis'
 import _ from 'lodash'
+import {evaluateQuery} from "../../services/evaluator";
 
 export const evaluate = async (request, h) => {
-    const payload = request.payload
-    console.log(payload.expression)
-    return 'This thing needs to be evaluated'
+    try {
+        const payload = request.payload
+        const record = await Redis.hgetall(request.payload.user_id)
+        return evaluateQuery(payload.expression, record)
+    } catch (e) {
+        return h.response({status: 'badRequest error', e: e}).code(400)
+    }
 }
 
 
