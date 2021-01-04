@@ -7,7 +7,7 @@ export const evaluate = async (request, h) => {
         const payload = request.payload
         const record = await Redis.hgetall(request.payload.user_id)
         if (_.isEmpty(record)) {
-            return h.response(404).code(404)
+            return h.response({status: 'notFound error'}).code(404)
         }
         return evaluateQuery(payload.expression, record)
     } catch (e) {
@@ -20,7 +20,7 @@ export const get = async (request, h) => {
     try {
         const record = await Redis.hgetall(request.params.id)
         if (_.isEmpty(record)) {
-            return h.response(404).code(404)
+            return h.response({status: 'notFound error'}).code(404)
         }
         return record
     } catch (e) {

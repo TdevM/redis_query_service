@@ -1,7 +1,7 @@
 import jsep from "jsep";
 import {parse, eval as evaluate} from 'expression-eval';
 
-const operatorMap = {
+const operatorAliases = {
     'AND': '&&',
     'OR': '||',
 }
@@ -21,7 +21,7 @@ const processDataType = (type) => {
 const processExpression = (inputString, userRecord) => {
     const tokens = inputString.split(' ')
     const processedTokens = tokens.map((token) => {
-        return operatorMap[token] || processDataType(token)
+        return operatorAliases[token] || processDataType(token)
     })
     return processedTokens.join(' ')
 }
