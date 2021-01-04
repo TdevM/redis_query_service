@@ -1,5 +1,5 @@
 require('dotenv').config()
-const Redis = require('../services/redis')
+const Redis = require('./src/services/redis')
 const csvtojsonV2 = require("csvtojson");
 const readStream = require('fs').createReadStream(process.cwd() + '/SegmentData.csv');
 const pipeline = Redis.pipeline();

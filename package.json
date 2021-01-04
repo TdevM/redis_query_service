@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node --presets es2015 src/server.js",
-    "seed": "node src/services/seeder.js"
+    "seed": "node seeder.js"
   },
   "author": "Gaurav Konar",
   "license": "ISC",
