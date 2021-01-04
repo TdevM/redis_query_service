@@ -24,7 +24,6 @@ export const get = async (request, h) => {
         }
         return record
     } catch (e) {
-        console.log(e)
         return h.response({status: 'badRequest error'}).code(400)
     }
 
