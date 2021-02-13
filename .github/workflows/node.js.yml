@@ -20,7 +20,7 @@ jobs:
         script: |
           cd ~/servers/redis_query_service/
           git pull
-          export NVM_DIR= "~/.nvm"
+          export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh   
           npm install
           pm2 restart 0
