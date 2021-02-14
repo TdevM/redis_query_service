@@ -10,7 +10,7 @@ let routes = [
         method: 'GET',
         path: '/server',
         handler: (request, h) => {
-            return request
+            return 'Server is up and running'
         }
     }
 ];
