@@ -4,9 +4,12 @@ services:
     image: 'redis'
   node_app:
     build: .
+    depends_on:
+      redis-server:
+        condition: service_started
     environment:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
     ports:
-      - "5001:5000"
+      - "8001:8001"
 
