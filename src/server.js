@@ -12,8 +12,8 @@ redis.on("connect", () => {
 
 // Create a server with a host and port
 const server = Hapi.server({
-    host: 'localhost',
-    port: 8001
+    host: "127.0.0.1",
+    port: 5000
 });
 
 

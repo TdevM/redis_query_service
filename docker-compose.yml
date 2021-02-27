@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  redis-server:
+    image: 'redis'
+  node_app:
+    build: .
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+    ports:
+      - "5001:5000"
+
