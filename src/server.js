@@ -7,7 +7,7 @@ import redis from './services/redis'
 
 
 redis.on("connect", () => {
-    console.log('Redis connected')
+    console.log('Redis connected   ')
 })
 
 redis.on("error", () => {

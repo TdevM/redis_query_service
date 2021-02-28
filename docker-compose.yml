@@ -11,5 +11,5 @@ services:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
     ports:
-      - "8001:8001"
+      - "5000:8001"
 
